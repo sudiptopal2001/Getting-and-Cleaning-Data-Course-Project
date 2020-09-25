@@ -1,0 +1,51 @@
+CODEBOOK.
+
+===========================================================================================
+i. The "run_analysis.R" file contains the script with the 5 steps required in the course. 
+ii.  The data set is downloaded and extracted in the folder "Dataset".
+
+=======================================================================================================================
+
+1. Step 1 merges the training and the test sets to create one data set. 
+To do this, each of the following documents is assigned to a variable as follows:
+
+features <- features.txt with col.names "Serial No.", "feature"
+activities <- activity_labels.txt with col.names "code", "activity"
+
+test.subject <- subject_test.txt with col.names "Subject"
+test.label <- y_test.txt with col.names "Activity"
+test.data <- X_test.txt with col.names = features$functions
+
+
+train.subject <-subject_train.txt with col.names "subject"
+train.label <- y_train.txt with col.names  "Activity"
+train.data <- X_train.txt with col.names = features$functions
+
+
+Then simply merge,
+
+test.data, test.label and test.subject to test.data by cbind(), 
+train.data, train.activity and train.label to train.data by cbind(),
+and finally test.data and train.data by rbind().
+
+
+2. Step 2 Extracts only the mean and standard deviation from each measurement.
+
+To achieve this, only the columns containing the mean and std terms as well as the subject and code were selected.
+
+
+3. Step 3 Use descriptive activity names to name the activities in the data set.
+
+These names are stored in the activities table. Using the gsub() function and for looping it over all the elemnts of data1$Activity, this can be done.
+
+
+4. Step 4 Appropriately label the data set with descriptive variable names. 
+
+To do this, various expression substitutions were used to make the names readable. gsub() function and some regular expressions were used. 
+
+
+Finally saved in tidydata.
+
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+To achieve this, only tidy data (final_data, in this case) was grouped by subject and activity and that result was passed to the summarize_all function so that could compute the mean of each group. That is saved in final_data table and in Tidy_Data.txt file 
